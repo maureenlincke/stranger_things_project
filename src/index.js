@@ -1,17 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { Route } from "react-router";
+import { BrowserRouter, Route } from "react-router-dom";
 import { Login } from "./components";
 import { Posts } from './components';
 
 const App = () => {
     const [token, setToken] = useState(null);
-    return (
-    <div className="app">
-        <Posts />
-        <Route path="/login" />
-    </div>
-    )
+
+    useEffect(() => {
+        console.log("Mounted")
+    }, [])
+    return (<BrowserRouter>
+        <div className="app">
+            <Route path="/posts">
+                <Posts />
+            </Route>
+            <Route path="/login" />
+        </div>
+    </BrowserRouter>)
 }
 
 ReactDOM.render(
