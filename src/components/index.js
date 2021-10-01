@@ -1,4 +1,4 @@
 import Posts from "./Posts";
-import Title from "./Title";
+import Login from "./Login";
 
-export { Posts, Title };
+export { Posts, Login };
