@@ -1,8 +1,25 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { BASE_URL } from '../constants'
 
-function login(userName, passWord) {
-    //pass those to the api
+function login(username, password, setToken) {
+    fetch(BASE_URL + 'users/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            user: {
+                username,
+                password,
+            },
+        }),
+    }).then((response) => response.json())
+      .then(({ data }) => {
+        const { token } = data.data;
+        console.log(token);
+    })
+    .catch(console.error);
     //==> token
     //save it into the users browser
     //updateState token/setToken
@@ -21,7 +38,8 @@ const Login = ({ setToken, match }) => {
         <form
             onSubmit={(e) =>{
                 e.preventDefault();
-                console.log(userName, password, confirmedPassword)
+                if (match.url === "/register") console.log("=> register");
+                if (match.url === "/login") console.log("=> login")
             }}
         >
             <div className="mb-3">
