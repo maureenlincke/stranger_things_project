@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { Login } from "./components";
 import { Posts } from './components';
+import Page from "./components/Page";
 
 const App = () => {
     const [token, setToken] = useState(null);
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/login" render={(routeProps) => <Login {...routeProps} setToken={setToken}/>}/>
         <Route path="/register" render={(routeProps) => <Login {...routeProps} setToken={setToken}/>}/>
         <Route path="/posts" render={() => <Posts isLoggedIn={!!token}/>}/>
+        <Route path="/page" render={() => <Page />}/>
     </BrowserRouter>)
 }
 

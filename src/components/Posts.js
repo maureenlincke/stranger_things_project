@@ -3,6 +3,7 @@ import { BASE_URL } from '../constants'
 
 const Posts = (props) => {
     const postsUrl = BASE_URL + '/posts'
+    const axios = require('axios').default;
 
     async function getPosts(){
         const posts = await axios.get(postsUrl);
@@ -11,7 +12,7 @@ const Posts = (props) => {
 
     useEffect(() => {
         getPosts();
-    }, [posts])
+    }, [])
 
     function makeHeaders(token) {
         //if token is not null
@@ -41,8 +42,11 @@ const Posts = (props) => {
                             method: 'POST',
                             header: makeHeaders(token),
                             body: JSON.stringify({
-                                name,
-
+                                title,
+                                description,
+                                price,
+                                location,
+                                willDeliver,
                             }),
                         }
                     );
