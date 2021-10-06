@@ -1,77 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from '../constants'
 
-const Posts = (props) => {
+const Posts = () => {
     const postsUrl = BASE_URL + '/posts'
-    const axios = require('axios').default;
 
-    async function getPosts(){
-        const posts = await axios.get(postsUrl);
-        console.log(posts);
-    }
+    const [page, setPage] = useState([]);
 
     useEffect(() => {
-        getPosts();
-    }, [])
-
-    function makeHeaders(token) {
-        //if token is not null
-        return {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer' + token
+        const fetchPage = async () => {
+            const response = await fetch(postsUrl);
+            const data = await response.json();
+            console.log(data);
+            console.log(data.data.posts);
+            console.log(data.data.posts.author)
+            return setPage((data.data.posts))
         }
-        //else
-        return {
-            'Content-Type': 'application/json'
-        }
-    }
-
-    const [posts, setPosts] = useState([]);
-    const [name, setName] = useState("")
-
-    return (<div>
-        <h1> Create a new post </h1>
-        <form
-            onSubmit={async (event) => {
-                event.preventDefault();
-                console.log(name);
-                try {
-                    const response = await fetch(
-                        postsUrl, 
-                        {
-                            method: 'POST',
-                            header: makeHeaders(token),
-                            body: JSON.stringify({
-                                title,
-                                description,
-                                price,
-                                location,
-                                willDeliver,
-                            }),
-                        }
-                    );
-                    const result = await response.json();
-                    setPosts([
-                        ...posts,
-                        result.data.name
-                    ])
-                } catch (err) {
-                    console.error(err);
-                }
-            }}
-            >
-            
-            <input
-                type='text'
-                placeholder='Name'
-                onChange={(event) => {
-
-                }}
-            >
-            </input>
-        </form>
-    </div>
-    )
+        fetchPage();
+        console.log(page)
+    }, []);
+    
+    
+    return (<div> 
+            <h1>     
+                {
+                page.map((post) => {
+                return (<div key={post.author}>
+                    <h3>{post.title}</h3>
+                    <p>{post.description}</p>
+                    <p>Price: {post.price}</p>
+                    <p>Seller: {post.author.username}</p>
+                    <p>Location: {post.location}</p>
+                    <button>Send Message</button>
+                </div>)
+                })
+            } 
+            </h1>
+            </div>)
+    
 }
 
 export default Posts;
