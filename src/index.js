@@ -24,7 +24,7 @@ const App = () => {
         <Route path="/login" render={(routeProps) => <Login {...routeProps} setToken={setToken}/>}/>
         <Route path="/register" render={(routeProps) => <Login {...routeProps} setToken={setToken}/>}/>
         <Route path="/posts" render={() => <Posts isLoggedIn={!!token}/>}/> */}
-        <Route path="/pages" render={() => <Pages />}/>
+        <Route exact path="/" render={() => <Pages />}/>
     </BrowserRouter>)
 }
 

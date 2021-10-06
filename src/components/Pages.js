@@ -5,17 +5,19 @@ const Pages = () => {
     const postsUrl = BASE_URL + '/posts'
 
     const [page, setPage] = useState([]);
-    console.log(page)
 
     useEffect(() => {
         const fetchPage = async () => {
             const response = await fetch(postsUrl);
             const data = await response.json();
             console.log(data);
-            setPage(data)
+            setPage(data.data.posts)
         }
         fetchPage();
+        console.log(page)
+        console.log(page.success)
     }, []);
+    
 
     return (<div> 
             <h1>     
