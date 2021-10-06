@@ -11,14 +11,15 @@ const Pages = () => {
             const response = await fetch(postsUrl);
             const data = await response.json();
             console.log(data);
-            setPage(data.data.posts)
+            console.log(data.data.posts);
+            console.log(data.data.posts.author)
+            return setPage((data.data.posts))
         }
         fetchPage();
         console.log(page)
-        console.log(page.success)
     }, []);
     
-
+    
     return (<div> 
             <h1>     
                 {
