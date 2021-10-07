@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from '../constants'
 
-const newPosts = (props) => {
+const newPosts = ({isLoggedIn}) => {
     const postsUrl = BASE_URL + '/posts'
     const axios = require('axios').default;
 
@@ -27,14 +27,17 @@ const newPosts = (props) => {
     }
 
     const [posts, setPosts] = useState([]);
-    const [name, setName] = useState("")
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [price, setPrice] = useState("");
+    const [location, setLocation] = useState("");
+    const [willDeliver, setWillDeliver] = useState(false)
 
     return (<div>
         <h1> Create a new post </h1>
         <form
             onSubmit={async (event) => {
                 event.preventDefault();
-                console.log(name);
                 try {
                     const response = await fetch(
                         postsUrl, 
@@ -63,11 +66,42 @@ const newPosts = (props) => {
             
             <input
                 type='text'
-                placeholder='Name'
+                placeholder='title'
                 onChange={(event) => {
-
+                    setTitle(event.target.value)
                 }}
             >
+            </input>
+            <input
+                type='text'
+                placeholder='description'
+                onChange={(event) => {
+                    setDescription(event.target.value)
+                }}
+            >
+            </input>
+            <input
+                type='text'
+                placeholder='price'
+                onChange={(event) => {
+                    setPrice(event.target.value)
+                }}
+            >
+            </input>
+            <input
+                type='text'
+                placeholder='location'
+                onChange={(event) => {
+                    setLocation(event.target.value)
+                }}
+            >
+            </input>
+            <input
+                type='checkbox'
+                onChange={(event) => {
+                    setWillDeliver(event.target.value)
+                }}
+            >Will Deliver?
             </input>
         </form>
     </div>

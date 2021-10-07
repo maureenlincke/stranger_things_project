@@ -17,17 +17,18 @@ async function login(username, password, setToken) {
     })
 
     const result = await response.json();
-    console.log(result.data.token);
     const token = result.data.token;
-    setToken(token)
+    setToken(token);
+    localStorage.setItem("token", token);
+    //localStorage.getItem("token")
 }
 
-function register(setToken, username, password, confirmedPassword){
+async function register(setToken, username, password, confirmedPassword){
     if (password !== confirmedPassword){
         alert("Passwords don't match");
         return;
     }
-    fetch(BASE_URL + 'users/register', {
+    const response = await fetch(BASE_URL + 'users/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -38,17 +39,15 @@ function register(setToken, username, password, confirmedPassword){
                 password,
             },
         }),
-    }).then(response => response.json())
-    .then(result => {
-        if(result.success === false){
-            alert(result.error.message)
-        }
-      console.log(result);
     })
-    .catch(console.error);
+
+    const result = await response.json();
+    const token = result.data.token;
+    setToken(token);
+    localStorage.setItem("token", token);
 }
 
-const Login = ({ setToken, match }) => {
+const Login = ({ setToken, match, isLoggedIn, history }) => {
     const [username, setUsername] = useState("your username");
     const [password, setPassword] = useState("");
     const [confirmedPassword, setConfirmedPassword] = useState("");
@@ -104,7 +103,9 @@ const Login = ({ setToken, match }) => {
             </div>
             ) : null}
             <div className="col-auto">
-                <button type="submit" className="btn btn-primary mb-3">
+                <button type="submit" className="btn btn-primary mb-3"
+                    onClick={() => {isLoggedIn && history.push("/home")}}
+                >
                     Submit
                 </button>
                 {

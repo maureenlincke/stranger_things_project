@@ -1,5 +1,6 @@
-import Posts from "./newPost";
+import Posts from "./Posts";
 import Login from "./Login";
 import Home from "./Home";
+import newPost from "./newPost"
 
-export { Posts, Login, Home };
+export { Posts, Login, Home, newPost };

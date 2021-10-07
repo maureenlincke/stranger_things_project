@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from '../constants'
 
-const Posts = () => {
+const Posts = ({isLoggedIn}) => {
     const postsUrl = BASE_URL + '/posts'
 
     const [page, setPage] = useState([]);
@@ -9,18 +9,17 @@ const Posts = () => {
     useEffect(() => {
         const fetchPage = async () => {
             const response = await fetch(postsUrl);
-            const data = await response.json();
-            console.log(data);
-            console.log(data.data.posts);
-            console.log(data.data.posts.author)
+            const data = await response.json();``
             return setPage((data.data.posts))
         }
         fetchPage();
-        console.log(page)
     }, []);
     
     
     return (<div> 
+        {isLoggedIn && <div>
+            Welcome!
+            </div>}
             <h1>     
                 {
                 page.map((post) => {
@@ -30,7 +29,9 @@ const Posts = () => {
                     <p>Price: {post.price}</p>
                     <p>Seller: {post.author.username}</p>
                     <p>Location: {post.location}</p>
-                    <button>Send Message</button>
+                    {isLoggedIn && <div>
+                        <button>Send Message</button>
+                        </div>}
                 </div>)
                 })
             } 
