@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BASE_URL } from '../constants'
+import { BASE_URL } from '../constants';
 
-function login(username, password, setToken) {
-    fetch(BASE_URL + 'users/login', {
+async function login(username, password, setToken) {
+    const response = await fetch(BASE_URL + 'users/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -14,23 +14,42 @@ function login(username, password, setToken) {
                 password,
             },
         }),
-    }).then((response) => response.json())
-      .then(({ data }) => {
-        const { token } = data.data;
-        console.log(token);
     })
-    .catch(console.error);
-    //==> token
-    //save it into the users browser
-    //updateState token/setToken
+
+    const result = await response.json();
+    console.log(result.data.token);
+    const token = result.data.token;
+    setToken(token)
 }
 
-function register(setToken, userName, passWord, confirmedPassword){
-
+function register(setToken, username, password, confirmedPassword){
+    if (password !== confirmedPassword){
+        alert("Passwords don't match");
+        return;
+    }
+    fetch(BASE_URL + 'users/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            user: {
+                username,
+                password,
+            },
+        }),
+    }).then(response => response.json())
+    .then(result => {
+        if(result.success === false){
+            alert(result.error.message)
+        }
+      console.log(result);
+    })
+    .catch(console.error);
 }
 
 const Login = ({ setToken, match }) => {
-    const [userName, setUserName] = useState("your username");
+    const [username, setUsername] = useState("your username");
     const [password, setPassword] = useState("");
     const [confirmedPassword, setConfirmedPassword] = useState("");
 
@@ -38,8 +57,8 @@ const Login = ({ setToken, match }) => {
         <form
             onSubmit={(e) =>{
                 e.preventDefault();
-                if (match.url === "/register") console.log("=> register");
-                if (match.url === "/login") console.log("=> login")
+                if (match.url === "/register") register(setToken, username, password, confirmedPassword)
+                if (match.url === "/login") login(username, password, setToken)
             }}
         >
             <div className="mb-3">
@@ -48,8 +67,8 @@ const Login = ({ setToken, match }) => {
                 </label>
                 <input
                     type="text"
-                    value={userName}
-                    onChange={({target: {value}}) => setUserName(value)}
+                    value={username}
+                    onChange={({target: {value}}) => setUsername(value)}
                     className="form-control"
                     id="exampleFormControlInput"
                     placeholder="your username"
