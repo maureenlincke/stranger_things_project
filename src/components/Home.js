@@ -1,25 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BASE_URL } from '../constants'
 
-async function userData(){
-    const token = localStorage.getItem("token")
-    console.log(token)
+// async function userData({setUsername}){
+//     const token = localStorage.getItem('token')
+//     const response = await fetch(BASE_URL + 'users/me', {
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Authorization': "BEARER " + token,
+//         },
+//         })
+//         const result = await response.json();
+//         const userName = result.data.username
+//         console.log(userName)
+//         return setUsername(userName)
+//     }
+//     userData()
 
-    const response = await fetch(BASE_URL + 'users/me', {
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': token,
-        },
-        }).then(response => response.json())
-        .then(result => {
-            console.log(result);
-        })
-        .catch(console.error);
-}
-userData()
 
 const Home = () => {
+    const token = localStorage.getItem("token")
+
     return (
         <div>
             <h2>Welcome to Stranger's Things!</h2>

@@ -5,11 +5,10 @@ import { Login, Posts, Home } from "./components";
 
 const App = () => {
     const [token, setToken] = useState(null);
+    const [username, setUsername] = useState("")
 
     useEffect(() => {
-        //get the token from local storage and use it to log in
         const storedToken = localStorage.getItem('token');
-        //check if storedToken is even there
         if (storedToken) {
             setToken(storedToken);
         }
@@ -25,7 +24,7 @@ const App = () => {
         <Link to="/profile">Profile</Link>
         
         <Link to="/home">Home</Link>
-        <Route path="/home" render={() => <Home isLoggedIn={!!token} token={token}/>}/>
+        <Route path="/home" render={() => <Home isLoggedIn={!!token} token={token} username={username} setUsername={setUsername} />}/>
         
         <Link to="/posts">Posts</Link>
         <Route path="/posts" render={() => <Posts isLoggedIn={!!token}/>}/>

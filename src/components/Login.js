@@ -20,7 +20,6 @@ async function login(username, password, setToken) {
     const token = result.data.token;
     setToken(token);
     localStorage.setItem("token", token);
-    //localStorage.getItem("token")
 }
 
 async function register(setToken, username, password, confirmedPassword){
@@ -40,6 +39,7 @@ async function register(setToken, username, password, confirmedPassword){
             },
         }),
     })
+    console.log(response)
 
     const result = await response.json();
     const token = result.data.token;
