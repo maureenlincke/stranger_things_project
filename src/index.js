@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Link } from "react-router-dom";
-import { Login, Posts, Home } from "./components";
+import { Login, Posts, Home, SinglePost, newPost } from "./components";
 
 const App = () => {
     const [token, setToken] = useState(null);
@@ -24,12 +24,13 @@ const App = () => {
         <Link to="/profile">Profile</Link>
         
         <Link to="/home">Home</Link>
-        <Route path="/home" render={() => <Home isLoggedIn={!!token} token={token} username={username} setUsername={setUsername} />}/>
+        <Route path="/home" render={(routeProps) => <Home {...routeProps} isLoggedIn={!!token} token={token} username={username} setUsername={setUsername} />}/>
         
         <Link to="/posts">Posts</Link>
-        <Route path="/posts" render={() => <Posts isLoggedIn={!!token}/>}/>
-                
+        <Route path="/posts" render={(routeProps) => <Posts {...routeProps} isLoggedIn={!!token}/>}/>
 
+        <Route path="/post/:postId" render={(routeProps) => <SinglePost {...routeProps} />}/>       
+        
     </BrowserRouter>)
 }
 
