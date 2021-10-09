@@ -1,3 +1,6 @@
+//TO DO
+// - Get the component to load
+
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from '../constants'
 

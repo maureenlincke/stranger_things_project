@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BASE_URL } from '../constants'
 
-
+//TO DO
+// - When the user is logged in, let them see their own posts (after fixing NewPosts)
 
 function logout(){
     fetch(BASE_URL +'/users/login', {
