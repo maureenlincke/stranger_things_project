@@ -16,11 +16,7 @@ function logout(){
             password: ''
             }
         })
-    }).then(response => response.json())
-    .then(result => {
-        console.log(result);
     })
-    .catch(console.error);
     localStorage.removeItem("token")
     localStorage.removeItem("username")
 }
@@ -29,7 +25,7 @@ const Home = ({isLoggedIn, history}) => {
     const token = localStorage.getItem("token")
     const username = localStorage.getItem("username")
 
-    isLoggedIn ? userData() : null;
+    //isLoggedIn ? userData() : null;
 
     return (
         <div>

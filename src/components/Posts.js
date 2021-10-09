@@ -17,14 +17,14 @@ const Posts = ({isLoggedIn, history}) => {
     
     
     return (<div> 
-        {isLoggedIn && <div>
+        {/* {isLoggedIn && <div>
             <h1>Welcome!</h1>
             <button onClick={history.push("/newpost")}>Create New Post</button>
-            </div>}
+            </div>} */}
             <h1>     
                 {
-                page.map((post, id) => {
-                return (<div key={id}>
+                page.map((post) => {
+                return (<div key={post._id}>
                     <h3>{post.title}</h3>
                     <p>{post.description}</p>
                     <p>Price: {post.price}</p>
@@ -32,7 +32,7 @@ const Posts = ({isLoggedIn, history}) => {
                     <p>Location: {post.location}</p>
                     {isLoggedIn && <div>
                         <button
-                        onClick={() => {history.push("/posts/" + post.id)}}
+                        onClick={() => {history.push("/posts/" + post._id)}}
                         >Send Message</button>
                         </div>}
                 </div>)

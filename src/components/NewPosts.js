@@ -1,30 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from '../constants'
 
-const newPosts = ({isLoggedIn}) => {
+const NewPosts = ({isLoggedIn}) => {
     const postsUrl = BASE_URL + '/posts'
-    const axios = require('axios').default;
+    // const axios = require('axios').default;
 
     async function getPosts(){
-        const posts = await axios.get(postsUrl);
-        console.log(posts);
+        // const posts = await axios.get(postsUrl);
+        fetch(BASE_URL + '/posts')
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+        })
+        .catch(console.error);
     }
 
     useEffect(() => {
         getPosts();
     }, [])
 
-    function makeHeaders(token) {
-        //if token is not null
-        return {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer' + token
-        }
-        //else
-        return {
-            'Content-Type': 'application/json'
-        }
-    }
+    // function makeHeaders(token) {
+    //     //if token is not null
+    //     return {
+    //         'Content-Type': 'application/json',
+    //         'Authorization': 'Bearer' + token
+    //     }
+    //     //else
+    //     return {
+    //         'Content-Type': 'application/json'
+    //     }
+    // }
 
     const [posts, setPosts] = useState([]);
     const [title, setTitle] = useState("");
@@ -67,6 +72,7 @@ const newPosts = ({isLoggedIn}) => {
             <input
                 type='text'
                 placeholder='title'
+                value={title}
                 onChange={(event) => {
                     setTitle(event.target.value)
                 }}
@@ -75,6 +81,7 @@ const newPosts = ({isLoggedIn}) => {
             <input
                 type='text'
                 placeholder='description'
+                value={description}
                 onChange={(event) => {
                     setDescription(event.target.value)
                 }}
@@ -83,6 +90,7 @@ const newPosts = ({isLoggedIn}) => {
             <input
                 type='text'
                 placeholder='price'
+                value={price}
                 onChange={(event) => {
                     setPrice(event.target.value)
                 }}
@@ -91,6 +99,7 @@ const newPosts = ({isLoggedIn}) => {
             <input
                 type='text'
                 placeholder='location'
+                value={location}
                 onChange={(event) => {
                     setLocation(event.target.value)
                 }}
@@ -98,6 +107,7 @@ const newPosts = ({isLoggedIn}) => {
             </input>
             <input
                 type='checkbox'
+                value={willDeliver}
                 onChange={(event) => {
                     setWillDeliver(event.target.value)
                 }}
@@ -108,4 +118,4 @@ const newPosts = ({isLoggedIn}) => {
     )
 }
 
-export default newPosts;
+export default NewPosts;
