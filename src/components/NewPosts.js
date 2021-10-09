@@ -5,7 +5,7 @@ const NewPosts = ({isLoggedIn}) => {
     const postsUrl = BASE_URL + '/posts'
     // const axios = require('axios').default;
 
-    async function getPosts(){
+    async function getPosts(setPosts){
         // const posts = await axios.get(postsUrl);
         fetch(BASE_URL + '/posts')
         .then(response => response.json())
@@ -13,6 +13,7 @@ const NewPosts = ({isLoggedIn}) => {
             console.log(result);
         })
         .catch(console.error);
+        setPosts(result.data.posts)
     }
 
     useEffect(() => {
