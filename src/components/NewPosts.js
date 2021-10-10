@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { BASE_URL } from '../constants'
 
 const NewPosts = ({isLoggedIn}) => {
+    console.log("heyo")
     const postsUrl = BASE_URL + '/posts'
     // const axios = require('axios').default;
 
@@ -23,17 +24,17 @@ const NewPosts = ({isLoggedIn}) => {
         getPosts();
     }, [])
 
-    // function makeHeaders(token) {
-    //     //if token is not null
-    //     return {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer' + token
-    //     }
-    //     //else
-    //     return {
-    //         'Content-Type': 'application/json'
-    //     }
-    // }
+    function makeHeaders(token) {
+        //if token is not null
+        return {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer' + token
+        }
+        //else
+        return {
+            'Content-Type': 'application/json'
+        }
+    }
 
     const [posts, setPosts] = useState([]);
     const [title, setTitle] = useState("");

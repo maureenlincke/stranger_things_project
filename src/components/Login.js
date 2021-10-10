@@ -46,29 +46,10 @@ async function register(setToken, username, password, confirmedPassword){
         }),
     })
     console.log(response)
-
     const result = await response.json();
     const token = result.data.token;
-    //TO DO
-    // - Fix this code to set the username in local storage
-    // const username = result.data.username
     setToken(token);
     localStorage.setItem("token", token);
-    // localStorage.setItem('username', username)
-    // console.log(username)
-}
-
-async function userData(){
-    const token = localStorage.getItem('token')
-    const response = await fetch(BASE_URL + 'users/me', {
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': "BEARER " + token,
-        },
-        })
-    const result = await response.json();
-    const userName = result.data.username
-    localStorage.setItem("username", userName)
 }
 
 const Login = ({ setToken, match, isLoggedIn, history }) => {
@@ -128,7 +109,7 @@ const Login = ({ setToken, match, isLoggedIn, history }) => {
             ) : null}
             <div className="col-auto">
                 <button type="submit" className="btn btn-primary mb-3"
-                    onClick={() => {isLoggedIn && history.push("/home"); userData()}}
+                    onClick={() => {isLoggedIn && history.push("/home")}}
                 >
                     Submit
                 </button>
