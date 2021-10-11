@@ -2,9 +2,15 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { Login, Posts, Home, SinglePost, NewPosts } from "./components";
+import { getPage } from "./apiHelpers";
 
 const App = () => {
     const [token, setToken] = useState(null);
+    const [page, setPage] = useState([])
+
+    useEffect(() => {
+        getPage().then(page => setPage(page))
+    }, [])
 
     useEffect(() => {
         const storedToken = localStorage.getItem('token');
@@ -24,7 +30,7 @@ const App = () => {
         <Route path="/login" render={(routeProps) => <Login {...routeProps} setToken={setToken} isLoggedIn={!!token}/>}/>
         <Route path="/register" render={(routeProps) => <Login {...routeProps} setToken={setToken} isLoggedIn={!!token}/>}/>
         <Route path="/home" render={(routeProps) => <Home {...routeProps} isLoggedIn={!!token} token={token}/>}/>
-        <Route path="/posts" render={(routeProps) => <Posts {...routeProps} isLoggedIn={!!token}/>}/>
+        <Route path="/posts" render={(routeProps) => <Posts {...routeProps} page={page} isLoggedIn={!!token}/>}/>
         <Route path="/posts/:postId" render={(routeProps) => <SinglePost {...routeProps} />}/> 
         <Route path="newposts" render={(routeProps) => <NewPosts {...routeProps} isLoggedIn={!!token}/>}/>      
         

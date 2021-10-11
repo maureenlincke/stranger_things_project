@@ -1,5 +1,5 @@
-//TO DO
-// - Get the component to load
+//NOTE
+// - This component is not loading on the homepage for some reason
 
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from '../constants'

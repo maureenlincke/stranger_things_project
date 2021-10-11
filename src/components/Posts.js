@@ -1,29 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { BASE_URL } from '../constants'
+import Search from "./Search";
 
-const Posts = ({isLoggedIn, history}) => {
-    const postsUrl = BASE_URL + '/posts'
-
-    const [page, setPage] = useState([]);
+const Posts = ({isLoggedIn, history, page}) => {
+    const [filteredResults, setFilteredResults] = useState(page)
 
     useEffect(() => {
-        const fetchPage = async () => {
-            const response = await fetch(postsUrl);
-            const data = await response.json();``
-            return setPage((data.data.posts))
-        }
-        fetchPage();
-    }, []);
-    
+        setFilteredResults(page)
+    }, [page])
     
     return (<div> 
-        {/* {isLoggedIn && <div>
-            <h1>Welcome!</h1>
-            <button onClick={history.push("/newpost")}>Create New Post</button>
-            </div>} */}
-            <h1>     
+        <Search page={page} setFilteredResults={setFilteredResults}/>
+            <div>     
                 {
-                page.map((post) => {
+                filteredResults.map((post) => {
                 return (<div key={post._id}>
                     <h3>{post.title}</h3>
                     <p>{post.description}</p>
@@ -38,7 +27,7 @@ const Posts = ({isLoggedIn, history}) => {
                 </div>)
                 })
             } 
-            </h1>
+            </div>
             </div>)
     
 }
