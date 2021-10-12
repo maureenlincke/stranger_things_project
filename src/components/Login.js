@@ -2,12 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BASE_URL } from '../constants';
 
-//TO DO
-// - When user logs in, save username the same way as token in Local Storage
-// - Make Login and Register links disappear
-// - When user logs out, fix the link that takes them to the log in screen
-// - 
-
 async function login(username, password, setToken) {
     const response = await fetch(BASE_URL + 'users/login', {
         method: 'POST',
@@ -45,7 +39,6 @@ async function register(setToken, username, password, confirmedPassword){
             },
         }),
     })
-    console.log(response)
     const result = await response.json();
     const token = result.data.token;
     setToken(token);

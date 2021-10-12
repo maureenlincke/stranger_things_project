@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { Login, Posts, Home, SinglePost, NewPosts } from "./components";
 import { getPage } from "./apiHelpers";
+import bootstrap from "bootstrap";
 
 const App = () => {
     const [token, setToken] = useState(null);

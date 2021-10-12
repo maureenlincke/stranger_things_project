@@ -1,5 +1,5 @@
 //NOTE
-// - This component is not loading on the homepage for some reason
+// - This component is not loading on the homepage, so I'm not sure if the code works or not
 
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from '../constants'
@@ -7,10 +7,10 @@ import { BASE_URL } from '../constants'
 const NewPosts = ({isLoggedIn}) => {
     console.log("heyo")
     const postsUrl = BASE_URL + '/posts'
-    // const axios = require('axios').default;
+    const axios = require('axios').default;
 
     async function getPosts(setPosts){
-        // const posts = await axios.get(postsUrl);
+        const posts = await axios.get(postsUrl);
         fetch(BASE_URL + '/posts')
         .then(response => response.json())
         .then(result => {
