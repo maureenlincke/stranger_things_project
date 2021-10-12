@@ -11,16 +11,22 @@ export default ({page, setFilteredResults}) => {
         })
     }
 
-    return (<div>
-        <label>Search Posts</label>
-        <input 
-        value={searchTerm}
-        onChange={
-            (event) => {
-                setSearchTerm(event.target.value);
-                const myFilteredPosts = filterPosts(page, event.target.value);
-                setFilteredResults(myFilteredPosts)
-            }
-        } placeholder="search"/>
-    </div>)
+    return (
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <form class="d-flex">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+                <input 
+                value={searchTerm}
+                onChange={
+                    (event) => {
+                        setSearchTerm(event.target.value);
+                        const myFilteredPosts = filterPosts(page, event.target.value);
+                        setFilteredResults(myFilteredPosts)
+                    }
+                } placeholder="search"
+                class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+            </form>
+        </div>
+    </nav>)
 }

@@ -100,8 +100,8 @@ const Login = ({ setToken, match, isLoggedIn, history }) => {
                 />
             </div>
             ) : null}
-            <div className="col-auto">
-                <button type="submit" className="btn btn-primary mb-3"
+            <div>
+                <button class="btn btn-primary" type="submit"
                     onClick={() => {isLoggedIn && history.push("/home")}}
                 >
                     Submit
