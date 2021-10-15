@@ -50,7 +50,7 @@ const App = () => {
         <Route path="/login" render={(routeProps) => <Login {...routeProps} setToken={setToken} isLoggedIn={!!token}/>}/>
         <Route path="/register" render={(routeProps) => <Login {...routeProps} setToken={setToken} isLoggedIn={!!token}/>}/>
         <Route path="/home" render={(routeProps) => <Home {...routeProps} isLoggedIn={!!token} token={token}/>}/>
-        <Route path="/posts" render={(routeProps) => <Posts {...routeProps} page={page} isLoggedIn={!!token}/>}/>
+        <Route exact path="/posts" render={(routeProps) => <Posts {...routeProps} page={page} isLoggedIn={!!token}/>}/>
         <Route path="/posts/:postId" render={(routeProps) => <SinglePost {...routeProps} />}/> 
         <Route path="newposts" render={(routeProps) => <NewPosts {...routeProps} isLoggedIn={!!token}/>}/>      
         
