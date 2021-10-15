@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Search from "./Search";
+import { findPostByID } from "../apiHelpers";
 
-const Posts = ({isLoggedIn, history, page}) => {
+const Posts = ({isLoggedIn, history, page, setSelectedPost}) => {
     const [filteredResults, setFilteredResults] = useState(page)
 
     useEffect(() => {
@@ -14,17 +15,17 @@ const Posts = ({isLoggedIn, history, page}) => {
                 {
                 filteredResults.map((post) => {
                 return (<div key={post._id} class="p-3 border bg-light">
-                    <h1 class="display-6">{post.title}</h1>
+                    <h1 class="display-6" 
+                    onClick={() => {
+                        const mySelectedPost = findPostByID(post._id, page)
+                        setSelectedPost(mySelectedPost)
+                        history.push("/posts/" + post._id)
+                    }}
+                    >{post.title}</h1>
                     <p class="lead">{post.description}</p>
                     <p>Price: {post.price}</p>
                     <p>Seller: {post.author.username}</p>
                     <p>Location: {post.location}</p>
-                    {isLoggedIn && <div>
-                        <button
-                        onClick={() => {history.push("/posts/" + post._id)}}
-                        class="btn btn-primary" type="submit"
-                        >Send Message</button>
-                        </div>}
                 </div>)
                 })
             } 

@@ -10,3 +10,7 @@ export async function getPage(){
         console.error(err)
     }
 }
+
+export function findPostByID(postID, page){
+    return page.find(post => post._id === postID)
+}

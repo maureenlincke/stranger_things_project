@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 const App = () => {
     const [token, setToken] = useState(null);
     const [page, setPage] = useState([])
+    const [selectedPost, setSelectedPost] = useState({})
 
     useEffect(() => {
         getPage().then(page => setPage(page))
@@ -50,8 +51,8 @@ const App = () => {
         <Route path="/login" render={(routeProps) => <Login {...routeProps} setToken={setToken} isLoggedIn={!!token}/>}/>
         <Route path="/register" render={(routeProps) => <Login {...routeProps} setToken={setToken} isLoggedIn={!!token}/>}/>
         <Route path="/home" render={(routeProps) => <Home {...routeProps} isLoggedIn={!!token} token={token}/>}/>
-        <Route exact path="/posts" render={(routeProps) => <Posts {...routeProps} page={page} isLoggedIn={!!token}/>}/>
-        <Route path="/posts/:postId" render={(routeProps) => <SinglePost {...routeProps} />}/> 
+        <Route exact path="/posts" render={(routeProps) => <Posts {...routeProps} page={page} isLoggedIn={!!token} setSelectedPost={setSelectedPost} />}/>
+        <Route path="/posts/:postId" render={(routeProps) => <SinglePost {...routeProps} selectedPost={selectedPost} isLoggedIn={!!token}/>}/> 
         <Route path="newposts" render={(routeProps) => <NewPosts {...routeProps} isLoggedIn={!!token}/>}/>      
         
     </BrowserRouter>)
