@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Search from "./Search";
 import { findPostByID } from "../apiHelpers";
 
-const Posts = ({isLoggedIn, history, page, setSelectedPost}) => {
+const Posts = ({history, page, setSelectedPost}) => {
     const [filteredResults, setFilteredResults] = useState(page)
 
     useEffect(() => {

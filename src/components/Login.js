@@ -45,10 +45,8 @@ async function register(setToken, username, password, confirmedPassword){
     localStorage.setItem("token", token);
 }
 
-const Login = ({ setToken, match, isLoggedIn, history }) => {
-    const [username, setUsername] = useState("your username");
-    const [password, setPassword] = useState("");
-    const [confirmedPassword, setConfirmedPassword] = useState("");
+const Login = ({ setToken, match, isLoggedIn, history, username, password, confirmedPassword, setUsername, setPassword, setConfirmedPassword }) => {
+
 
     return (
         <form
