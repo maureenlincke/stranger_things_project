@@ -80,7 +80,7 @@ const Login = ({ setToken, match, isLoggedIn, history }) => {
                     value={password}
                     onChange={({target: {value}}) => setPassword(value)}
                     className="form-control"
-                    id="examleFormControlInput"
+                    id="exampleFormControlInput"
                     placeholder=""
                 />
             </div>
