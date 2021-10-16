@@ -19,6 +19,8 @@ const App = () => {
         getPage().then(page => setPage(page))
     }, [])
 
+    console.log(page)
+
     useEffect(() => {
         const storedToken = localStorage.getItem('token');
         if (storedToken) {
@@ -56,8 +58,8 @@ const App = () => {
         <Route path="/register" render={(routeProps) => <Login {...routeProps} setToken={setToken} isLoggedIn={!!token} username={username} setUsername={setUsername} password={password} setPassword={setPassword} confirmedPassword={confirmedPassword} setConfirmedPassword={setConfirmedPassword}/>}/>
         <Route path="/home" render={(routeProps) => <Home {...routeProps} isLoggedIn={!!token} token={token}/>}/>
         <Route exact path="/posts" render={(routeProps) => <Posts {...routeProps} page={page} isLoggedIn={!!token} setSelectedPost={setSelectedPost} />}/>
-        <Route path="/posts/:postId" render={(routeProps) => <SinglePost {...routeProps} selectedPost={selectedPost} isLoggedIn={!!token} username={username}/>}/> 
-        <Route path="newposts" render={(routeProps) => <NewPosts {...routeProps} isLoggedIn={!!token}/>}/>      
+        <Route path="/posts/:postId" render={(routeProps) => <SinglePost {...routeProps} page={page} selectedPost={selectedPost} setSelectedPost={setSelectedPost} isLoggedIn={!!token} username={username}/>}/> 
+        <Route exact path="newposts" render={(routeProps) => <NewPosts {...routeProps} isLoggedIn={!!token}/>}/>      
         
     </BrowserRouter>)
 }

@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BASE_URL } from '../constants'
 
-//TO DO
-// - When the user is logged in, let them see their own posts (after fixing NewPosts)
 async function userData(){
     const token = localStorage.getItem('token')
+    console.log(token)
     const response = await fetch(BASE_URL + 'users/me', {
         headers: {
             'Content-Type': 'application/json',
@@ -14,7 +13,10 @@ async function userData(){
         })
     const result = await response.json();
     const userName = result.data.username
+    const messages = result.data.messages
+
     localStorage.setItem("username", userName)
+    localStorage.setItem("messages", messages)
 }
 
 function logout(){
@@ -32,21 +34,26 @@ function logout(){
     })
     localStorage.removeItem("token")
     localStorage.removeItem("username")
+    localStorage.removeItem("messages")
 }
 
-const Home = ({isLoggedIn, history}) => {
-    const token = localStorage.getItem("token")
+const Home = () => {
+    const messages = localStorage.getItem("messages")
     const username = localStorage.getItem("username")
 
     useEffect(() => {
-        userData()
+        userData();
     }, []);
 
+    //figure out how to add messages to this const so they can be accessed as an array (currently a string in local storage)
     return (
         <div>
-            <h2>Welcome to Stranger's Things!</h2>
-            <h3>Logged in as {username}</h3>
+            <h1>Welcome to Stranger's Things!</h1>
+            <h2>Logged in as {username}</h2>
             <button onClick={() => {logout()}}>Logout</button>
+            <div>
+                <h2>Messages</h2>
+            </div>
         </div>
     )
 }

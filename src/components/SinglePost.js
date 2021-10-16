@@ -1,11 +1,21 @@
-import React from "react";
+import React, {useEffect} from "react";
+import { findPostByID } from "../apiHelpers";
 
-const SinglePost = ({selectedPost, isLoggedIn, username}) => {
-    console.log(isLoggedIn)
-    console.log(selectedPost)
-    console.log(selectedPost.author.username)
-    console.log(username)
-    return (<div>
+const SinglePost = ({match, page, selectedPost, setSelectedPost, isLoggedIn, username, findPostByID}) => {
+    // useEffect(() => {
+    //     console.log("useEffect has fired")
+    //     const postId = Number(match.params.postId)
+    //     const foundPost = findPostByID(postId, page);
+        
+    //     setSelectedPost(foundPost)
+    // }, [page])
+
+    // console.log(page)
+    // console.log(selectedPost)
+    
+    return (
+        // page.length && 
+        <div>
         <h1>{selectedPost.title}</h1>
         <h2>{selectedPost.author.username}</h2>
         <p>{selectedPost.description}</p>

@@ -25,15 +25,15 @@ const NewPosts = ({isLoggedIn}) => {
     }, [])
 
     function makeHeaders(token) {
-        //if token is not null
-        return {
+        if(token){
+            return {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer' + token
-        }
-        //else
-        return {
+        }}
+        else if(!token){
+            return {
             'Content-Type': 'application/json'
-        }
+        }}
     }
 
     const [posts, setPosts] = useState([]);

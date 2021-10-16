@@ -11,6 +11,9 @@ export async function getPage(){
     }
 }
 
-export function findPostByID(postID, page){
-    return page.find(post => post._id === postID)
+export function findPostByID(postId, page){
+    const myPost = page.find(post => post._id === postId);
+    return myPost;
+    // if(!myPost) return {}
+    // else myPost;
 }
